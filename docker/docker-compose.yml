@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  mnt-23406-patch-share-share:
+    image: alfresco-share-mnt-23406-patch-share:development
+    build:
+      dockerfile: ./Dockerfile
+      context: ../../../target
+    environment:
+      CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8888"
+      REPO_HOST: ${acs.host}
+      REPO_PORT: ${acs.port}
+    ports:
+      - "${share.port}:8080"
+      - "${share.debug.port}:8888"
